@@ -15,15 +15,35 @@ const facturapi = axios.create({
 });
 
 // Datos de ejemplo para un cliente
-const clienteEjemplo = {
-  legal_name: "Empresa Ejemplo S.A.",
-  tax_id: "XAXX010101000",
-  email: "empresa@ejemplo.com",
-};
+const clienteN = {
+  "legal_name": "John Doe",
+  "tax_id": "XAXX010101000",
+  "tax_system": "616",
+  "email": "john@example.com",
+  "address": {
+    "zip": "83240"
+  }
+}
+
+const clienteU = {
+  "tax_id": "XAXX010101000",
+  "tax_system": "616",
+  "legal_name": "JOHN DOE PRUEBA",
+  "email": "john@example.com",
+  "address": {
+    "city": "Hermosillo",
+    "municipality": "Hermosillo",
+    "state": "Sonora",
+    "country": "MEX",
+    "zip": "83240"
+  },
+  "default_invoice_use": "G03",
+}
+
 
 // Obtener todos los clientes
 function getAllCustomers() {
-  facturapi.get("/")
+  facturapi.get("")
     .then(response => console.log(response.data))
     .catch(error => console.error("Error al obtener clientes:", error.response?.data || error.message));
 }
@@ -36,7 +56,7 @@ function getCustomerById(customerId) {
 }
 
 // Crear un nuevo cliente
-function createCustomer() {
+function createCustomer(clienteEjemplo) {
   facturapi.post("/", clienteEjemplo)
     .then(response => console.log("Cliente creado:", response.data))
     .catch(error => console.error("Error al crear cliente:", error.response?.data || error.message));
@@ -57,8 +77,8 @@ function deleteCustomer(customerId) {
 }
 
 // === Ejemplo de uso ===
- getAllCustomers();
-// getCustomerById("ID_DEL_CLIENTE_AQUI");
-// createCustomer();
-// updateCustomer("ID_DEL_CLIENTE_AQUI", { legal_name: "Nuevo Nombre S.A." });
-// deleteCustomer("ID_DEL_CLIENTE_AQUI");
+getAllCustomers();
+// getCustomerById("67dc3d5605fe87f1c99cb8fb");
+// createCustomer(clienteN);
+// updateCustomer("67dc536ec3e708c2f4a70335", clienteU);
+// deleteCustomer("67dc3d5605fe87f1c99cb8fb");
